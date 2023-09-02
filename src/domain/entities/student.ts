@@ -1,4 +1,4 @@
-import { Entity } from '../../core/entities/Entity'
+import { Entity } from '../../core/entities/entity'
 
 interface StudentProps {
   name: string
