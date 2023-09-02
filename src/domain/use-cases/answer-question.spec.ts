@@ -1,11 +1,17 @@
 import { expect, test } from 'vitest'
 
 import { AnswerQuestionUseCase } from './answer-question'
+import { AnswersRepository } from '../repositories/Answers-repository'
 
-test('create an answer', () => {
-  const answerQuestion = new AnswerQuestionUseCase()
+const fakeAnswersRepository: AnswersRepository = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  create: async (answer) => {},
+}
 
-  const answer = answerQuestion.execute({
+test('create an answer', async () => {
+  const answerQuestion = new AnswerQuestionUseCase(fakeAnswersRepository)
+
+  const answer = await answerQuestion.execute({
     instructorId: 'instructorId',
     questionId: 'questionId',
     content: 'New Answer',
