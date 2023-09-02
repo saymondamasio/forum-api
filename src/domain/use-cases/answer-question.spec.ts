@@ -1,11 +1,11 @@
 import { expect, test } from 'vitest'
 
 import { AnswerQuestionUseCase } from './answer-question'
-import { AnswersRepository } from '../repositories/Answers-repository'
+import { AnswersRepository } from '../repositories/answers-repository'
 
 const fakeAnswersRepository: AnswersRepository = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  create: async (answer) => {},
+  create: async () => {},
 }
 
 test('create an answer', async () => {

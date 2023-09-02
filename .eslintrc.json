@@ -1,3 +1,6 @@
 {
-  "extends": ["@saymondamasio/eslint-config/node"]
+  "extends": ["@saymondamasio/eslint-config/node"],
+  "rules": {
+    "no-useless-constructor": "off"
+  }
 }
