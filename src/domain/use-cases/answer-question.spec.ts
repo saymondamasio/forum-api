@@ -1,7 +1,5 @@
-import { expect, test } from 'vitest'
-
-import { AnswerQuestionUseCase } from './answer-question'
 import { AnswersRepository } from '../repositories/answers-repository'
+import { AnswerQuestionUseCase } from './answer-question'
 
 const fakeAnswersRepository: AnswersRepository = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
