@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/dist/config'
+import { defineConfig } from 'vitest/config'
 
 import tsConfigPaths from 'vite-tsconfig-paths'
 
