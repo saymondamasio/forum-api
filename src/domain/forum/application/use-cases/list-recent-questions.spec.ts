@@ -50,7 +50,7 @@ describe('List Recent Questions', () => {
   })
 
   it('should be able to list paginated recent questions', async () => {
-    Array.from({ length: 40 }).forEach(async () => {
+    Array.from({ length: 30 }).forEach(async () => {
       await inMemoryQuestionsRepository.create(
         makeQuestion({
           createdAt: new Date(2023, 0, 10),
@@ -58,14 +58,8 @@ describe('List Recent Questions', () => {
       )
     })
 
-    await inMemoryQuestionsRepository.create(
-      makeQuestion({
-        createdAt: new Date(2023, 0, 5),
-      }),
-    )
-
     const { questions } = await listRecentQuestions.execute({ page: 2 })
 
-    expect(questions).toHaveLength(20)
+    expect(questions).toHaveLength(10)
   })
 })
