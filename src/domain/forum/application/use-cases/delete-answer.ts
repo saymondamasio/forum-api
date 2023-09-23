@@ -1,5 +1,4 @@
 import { AnswersRepository } from '../repositories/answers-repository'
-import { QuestionsRepository } from '../repositories/questions-repository'
 
 interface DeleteAnswerUseCaseRequest {
   id: string
@@ -12,16 +11,16 @@ export class DeleteAnswerUseCase {
   constructor(private answersRepository: AnswersRepository) {}
 
   async execute({ id, authorId }: DeleteAnswerUseCaseRequest): Promise<void> {
-    const question = await this.answersRepository.findById(id)
+    const answer = await this.answersRepository.findById(id)
 
-    if (!question) {
-      throw new Error('Question not found')
+    if (!answer) {
+      throw new Error('Answer not found')
     }
 
-    if (question.authorId.toString() !== authorId) {
-      throw new Error('You are not authorized to delete this question')
+    if (answer.authorId.toString() !== authorId) {
+      throw new Error('You are not authorized to delete this answer')
     }
 
-    await this.answersRepository.delete(question)
+    await this.answersRepository.delete(answer)
   }
 }

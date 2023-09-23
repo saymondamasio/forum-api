@@ -6,6 +6,14 @@ export default class InMemoryQuestionsRepository
 {
   public items: Question[] = []
 
+  async save(question: Question): Promise<void> {
+    const questionIndex = this.items.findIndex(
+      (item) => item.id === question.id,
+    )
+
+    this.items[questionIndex] = question
+  }
+
   async findById(id: string): Promise<Question | null> {
     const question = this.items.find((item) => item.id.toString() === id)
 
