@@ -13,9 +13,9 @@ export default class InMemoryQuestionCommentsRepository
   }
 
   async findById(id: string): Promise<QuestionComment | null> {
-    const questioncomment = this.items.find((item) => item.id.toString() === id)
+    const questionComment = this.items.find((item) => item.id.toString() === id)
 
-    return questioncomment ?? null
+    return questionComment ?? null
   }
 
   public items: QuestionComment[] = []
