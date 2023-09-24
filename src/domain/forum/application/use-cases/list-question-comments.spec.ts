@@ -34,12 +34,16 @@ describe('List Question Comments', () => {
       }),
     )
 
-    const { questionComments } = await listQuestionComments.execute({
+    const result = await listQuestionComments.execute({
       page: 1,
       questionId: 'question-1',
     })
 
-    expect(questionComments).toHaveLength(3)
+    expect(result.isRight()).toBe(true)
+
+    if (result.isRight()) {
+      expect(result.value.questionComments).toHaveLength(3)
+    }
   })
 
   it('should be able to list paginated question comments', async () => {
@@ -51,11 +55,15 @@ describe('List Question Comments', () => {
       )
     })
 
-    const { questionComments } = await listQuestionComments.execute({
+    const result = await listQuestionComments.execute({
       page: 2,
       questionId: 'question-1',
     })
 
-    expect(questionComments).toHaveLength(10)
+    expect(result.isRight()).toBe(true)
+
+    if (result.isRight()) {
+      expect(result.value.questionComments).toHaveLength(10)
+    }
   })
 })

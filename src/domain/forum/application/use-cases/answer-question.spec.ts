@@ -11,13 +11,14 @@ describe('Answer Question', () => {
   })
 
   it('should be able create an answer', async () => {
-    const { answer } = await answerQuestion.execute({
+    const { isRight, value } = await answerQuestion.execute({
       instructorId: 'instructorId',
       questionId: 'questionId',
       content: 'New Answer',
     })
 
-    expect(answer.content).toEqual('New Answer')
-    expect(inMemoryAnswersRepository.items[0].id).toEqual(answer.id)
+    expect(isRight()).toBe(true)
+    expect(value?.answer.content).toEqual('New Answer')
+    expect(inMemoryAnswersRepository.items[0].id).toEqual(value?.answer.id)
   })
 })

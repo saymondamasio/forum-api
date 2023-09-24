@@ -36,12 +36,13 @@ describe('List Answers', () => {
       }),
     )
 
-    const { answers } = await listAnswersUseCase.execute({
+    const { isRight, value } = await listAnswersUseCase.execute({
       page: 1,
       questionId: 'question-1',
     })
 
-    expect(answers).toHaveLength(3)
+    expect(isRight()).toBe(true)
+    expect(value?.answers).toHaveLength(3)
   })
 
   it('should be able to list paginated recent questions', async () => {
@@ -53,11 +54,12 @@ describe('List Answers', () => {
       )
     })
 
-    const { answers } = await listAnswersUseCase.execute({
+    const { isRight, value } = await listAnswersUseCase.execute({
       page: 2,
       questionId: 'question-1',
     })
 
-    expect(answers).toHaveLength(10)
+    expect(isRight()).toBe(true)
+    expect(value?.answers).toHaveLength(10)
   })
 })

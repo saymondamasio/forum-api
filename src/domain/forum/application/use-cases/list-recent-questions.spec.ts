@@ -34,19 +34,23 @@ describe('List Recent Questions', () => {
       }),
     )
 
-    const { questions } = await listRecentQuestions.execute({ page: 1 })
+    const result = await listRecentQuestions.execute({ page: 1 })
 
-    expect(questions).toEqual([
-      expect.objectContaining({
-        createdAt: new Date(2023, 0, 10),
-      }),
-      expect.objectContaining({
-        createdAt: new Date(2023, 0, 5),
-      }),
-      expect.objectContaining({
-        createdAt: new Date(2023, 0, 1),
-      }),
-    ])
+    expect(result.isRight()).toBe(true)
+
+    if (result.isRight()) {
+      expect(result.value.questions).toEqual([
+        expect.objectContaining({
+          createdAt: new Date(2023, 0, 10),
+        }),
+        expect.objectContaining({
+          createdAt: new Date(2023, 0, 5),
+        }),
+        expect.objectContaining({
+          createdAt: new Date(2023, 0, 1),
+        }),
+      ])
+    }
   })
 
   it('should be able to list paginated recent questions', async () => {
@@ -58,8 +62,11 @@ describe('List Recent Questions', () => {
       )
     })
 
-    const { questions } = await listRecentQuestions.execute({ page: 2 })
+    const result = await listRecentQuestions.execute({ page: 2 })
 
-    expect(questions).toHaveLength(10)
+    expect(result.isRight()).toBe(true)
+    if (result.isRight()) {
+      expect(result.value.questions).toHaveLength(10)
+    }
   })
 })
