@@ -4,6 +4,20 @@ import { QuestionComment } from '@/domain/forum/enterprise/entities/question-com
 export default class InMemoryQuestionCommentsRepository
   implements QuestionCommentsRepository
 {
+  async delete(questionComment: QuestionComment): Promise<void> {
+    const questionCommentIndex = this.items.findIndex(
+      (item) => item.id === questionComment.id,
+    )
+
+    this.items.splice(questionCommentIndex, 1)
+  }
+
+  async findById(id: string): Promise<QuestionComment | null> {
+    const questioncomment = this.items.find((item) => item.id.toString() === id)
+
+    return questioncomment ?? null
+  }
+
   public items: QuestionComment[] = []
 
   async create(questionComment: QuestionComment) {
