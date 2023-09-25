@@ -3,15 +3,21 @@ import { makeAnswer } from 'test/factories/make-answer'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import InMemoryAnswerCommentsRepository from 'test/repositories/in-memory-answer-comments-repository'
+import InMemoryAnswerAttachmentsRepository from 'test/repositories/in-memory-answer-attachments-repository'
 
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let commentOnAnswer: CommentOnAnswerUseCase
 
 describe('Comment on Answer', () => {
   beforeEach(() => {
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository()
     inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository()
-    inMemoryAnswersRepository = new InMemoryAnswersRepository()
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswerAttachmentsRepository,
+    )
 
     commentOnAnswer = new CommentOnAnswerUseCase(
       inMemoryAnswersRepository,
