@@ -4,7 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { ChooseBestAnswerUseCase } from './choose-best-answer'
 import { makeAnswer } from 'test/factories/make-answer'
-import { NotAllowedError } from './erros/not-allowed-error'
+import { NotAllowedError } from '@/core/errors/erros/not-allowed-error'
 import InMemoryQuestionAttachmentRepository from 'test/repositories/in-memory-question-attachments-repository'
 import InMemoryAnswerAttachmentsRepository from 'test/repositories/in-memory-answer-attachments-repository'
 

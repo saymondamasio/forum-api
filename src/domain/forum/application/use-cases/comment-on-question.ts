@@ -2,8 +2,8 @@ import { QuestionsRepository } from '../repositories/questions-repository'
 import { QuestionComment } from '../../enterprise/entities/question-comment'
 import { QuestionCommentsRepository } from '../repositories/question-comments-repository'
 import { Either, left, right } from '@/core/either'
-import { NotAllowedError } from './erros/not-allowed-error'
-import { ResourceNotFoundError } from './erros/resource-not-found-error'
+import { NotAllowedError } from '@/core/errors/erros/not-allowed-error'
+import { ResourceNotFoundError } from '@/core/errors/erros/resource-not-found-error'
 
 interface CommentOnQuestionUseCaseRequest {
   authorId: string

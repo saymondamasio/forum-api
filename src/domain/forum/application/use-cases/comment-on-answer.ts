@@ -2,8 +2,8 @@ import { AnswersRepository } from '../repositories/answers-repository'
 import { AnswerComment } from '../../enterprise/entities/answer-comment'
 import { AnswerCommentsRepository } from '../repositories/answer-comments-repository'
 import { Either, left, right } from '@/core/either'
-import { NotAllowedError } from './erros/not-allowed-error'
-import { ResourceNotFoundError } from './erros/resource-not-found-error'
+import { NotAllowedError } from '@/core/errors/erros/not-allowed-error'
+import { ResourceNotFoundError } from '@/core/errors/erros/resource-not-found-error'
 
 interface CommentOnAnswerUseCaseRequest {
   authorId: string

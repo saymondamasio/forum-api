@@ -2,7 +2,7 @@ import InMemoryQuestionsRepository from 'test/repositories/in-memory-questions-r
 import { makeQuestion } from 'test/factories/make-question'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { EditQuestionUseCase } from './edit-question'
-import { NotAllowedError } from './erros/not-allowed-error'
+import { NotAllowedError } from '@/core/errors/erros/not-allowed-error'
 import InMemoryQuestionAttachmentRepository from 'test/repositories/in-memory-question-attachments-repository'
 import { makeQuestionAttachment } from 'test/factories/make-question-attachments'
 
