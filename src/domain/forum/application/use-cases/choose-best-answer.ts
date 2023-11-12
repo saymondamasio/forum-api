@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { Question } from '../../enterprise/entities/question'
 import { AnswersRepository } from '../repositories/answers-repository'
@@ -17,6 +19,7 @@ type ChooseBestAnswerUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class ChooseBestAnswerUseCase {
   constructor(
     private answersRepository: AnswersRepository,

@@ -1,8 +1,10 @@
-import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-repository'
-import { ReadNotificationUseCase } from './read-notification'
-import { makeNotification } from 'test/factories/make-notificaiton'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { NotAllowedError } from '@/core/errors/erros/not-allowed-error'
+
+import { ReadNotificationUseCase } from './read-notification'
+
+import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-repository'
+import { makeNotification } from 'test/factories/make-notificaiton'
 
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository
 let readNotification: ReadNotificationUseCase
@@ -25,7 +27,6 @@ describe('Read Notification', () => {
       notificationId: notification.id.toString(),
     })
 
-    console.log(result.value)
     expect(result.isRight()).toBe(true)
 
     if (result.isRight()) {
