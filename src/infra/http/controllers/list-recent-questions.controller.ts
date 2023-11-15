@@ -1,4 +1,10 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common'
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Query,
+  UseGuards,
+} from '@nestjs/common'
 import { z } from 'zod'
 
 import { ZodValidationPipe } from '../pipes/zod-validation.pipe'
@@ -28,8 +34,8 @@ export class ListRecentQuestionsController {
       page,
     })
 
-    if(result.isLeft()) {
-      throw new Error()
+    if (result.isLeft()) {
+      throw new BadRequestException()
     }
 
     const questions = result.value.questions
