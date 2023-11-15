@@ -31,7 +31,7 @@ Content-type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-  "title": "Example Question 1",
+  "title": "Example Question 20",
   "content": "Example Content"
 }
 
