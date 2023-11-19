@@ -7,12 +7,12 @@ import { QuestionsRepository } from '../repositories/questions-repository'
 import { ResourceNotFoundError } from '@/core/errors/erros/resource-not-found-error'
 import { NotAllowedError } from '@/core/errors/erros/not-allowed-error'
 
-interface ChooseBestAnswerUseCaseRequest {
+interface ChooseQuestionBestAnswerUseCaseRequest {
   answerId: string
   authorId: string
 }
 
-type ChooseBestAnswerUseCaseResponse = Either<
+type ChooseQuestionBestAnswerUseCaseResponse = Either<
   ResourceNotFoundError | NotAllowedError,
   {
     question: Question
@@ -20,7 +20,7 @@ type ChooseBestAnswerUseCaseResponse = Either<
 >
 
 @Injectable()
-export class ChooseBestAnswerUseCase {
+export class ChooseQuestionBestAnswerUseCase {
   constructor(
     private answersRepository: AnswersRepository,
     private questionsRepository: QuestionsRepository,
@@ -29,7 +29,7 @@ export class ChooseBestAnswerUseCase {
   async execute({
     authorId,
     answerId,
-  }: ChooseBestAnswerUseCaseRequest): Promise<ChooseBestAnswerUseCaseResponse> {
+  }: ChooseQuestionBestAnswerUseCaseRequest): Promise<ChooseQuestionBestAnswerUseCaseResponse> {
     const answer = await this.answersRepository.findById(answerId)
 
     if (!answer) {
