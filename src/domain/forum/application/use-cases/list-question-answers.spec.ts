@@ -1,21 +1,25 @@
-import { ListAnswersUseCase } from './list-answers'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+
+import { ListQuestionAnswersUseCase } from './list-question-answers'
+
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { makeAnswer } from 'test/factories/make-answer'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import InMemoryAnswerAttachmentsRepository from 'test/repositories/in-memory-answer-attachments-repository'
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
-let listAnswersUseCase: ListAnswersUseCase
+let listQuestionAnswersUseCase: ListQuestionAnswersUseCase
 
-describe('List Answers', () => {
+describe('List Question Answers', () => {
   beforeEach(() => {
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
       inMemoryAnswerAttachmentsRepository,
     )
-    listAnswersUseCase = new ListAnswersUseCase(inMemoryAnswersRepository)
+    listQuestionAnswersUseCase = new ListQuestionAnswersUseCase(
+      inMemoryAnswersRepository,
+    )
   })
 
   it('should be able to list recent questions', async () => {
@@ -37,7 +41,7 @@ describe('List Answers', () => {
       }),
     )
 
-    const { isRight, value } = await listAnswersUseCase.execute({
+    const { isRight, value } = await listQuestionAnswersUseCase.execute({
       page: 1,
       questionId: 'question-1',
     })
@@ -55,7 +59,7 @@ describe('List Answers', () => {
       )
     })
 
-    const { isRight, value } = await listAnswersUseCase.execute({
+    const { isRight, value } = await listQuestionAnswersUseCase.execute({
       page: 2,
       questionId: 'question-1',
     })
