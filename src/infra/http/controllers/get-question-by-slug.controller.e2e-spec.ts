@@ -31,7 +31,7 @@ describe('Get question by slug (E2E)', () => {
     await app.init()
   })
 
-  test.skip('[GET] /questions/:slug', async () => {
+  test('[GET] /questions/:slug', async () => {
     const user = await studentFactory.makePrismaStudent()
 
     const accessToken = jwtService.sign({
