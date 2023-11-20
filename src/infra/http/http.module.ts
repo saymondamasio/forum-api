@@ -17,6 +17,7 @@ import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-
 import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question'
 import { DeleteQuestionCommentUseCase } from '@/domain/forum/application/use-cases/delete-question-comment'
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer'
+import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment'
 
 import { CreateAccountController } from './controllers/create-account.controller'
 import { ListRecentQuestionsController } from './controllers/list-recent-questions.controller'
@@ -33,6 +34,7 @@ import { ChooseQuestionBestAnswerController } from './controllers/choose-questio
 import { CommentOnQuestionController } from './controllers/comment-on-question.controller'
 import { DeleteQuestionCommentController } from './controllers/delete-question-comment.controller'
 import { CommentOnAnswerController } from './controllers/comment-on-answer.controller'
+import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -52,6 +54,7 @@ import { CommentOnAnswerController } from './controllers/comment-on-answer.contr
     CommentOnQuestionController,
     DeleteQuestionCommentController,
     CommentOnAnswerController,
+    DeleteAnswerCommentController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -69,6 +72,7 @@ import { CommentOnAnswerController } from './controllers/comment-on-answer.contr
     CommentOnQuestionUseCase,
     DeleteQuestionCommentUseCase,
     CommentOnAnswerUseCase,
+    DeleteAnswerCommentUseCase,
   ],
 })
 export class HttpModule {}
