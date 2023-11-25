@@ -17,6 +17,5 @@ import { EnvModule } from './env/env.module'
     HttpModule,
     EnvModule,
   ],
-  providers: [EnvService],
 })
 export class AppModule {}

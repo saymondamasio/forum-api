@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common'
 import { Either, left, right } from '@/core/either'
 import { AttachmentsRepository } from '../repositories/attachments-repository'
 import { Attachment } from '../../enterprise/entities/attachment'
-import { Uploader } from '@/infra/storage/uploader'
+import { Uploader } from '@/domain/forum/application/storage/uploader'
 
 import { InvalidAttachmentTypeError } from './erros/invalid-attachment-type-error'
 
