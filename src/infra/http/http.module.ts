@@ -39,6 +39,7 @@ import { CommentOnAnswerController } from './controllers/comment-on-answer.contr
 import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller'
 import { ListQuestionCommentsController } from './controllers/list-question-comments.controller'
 import { ListAnswerCommentsController } from './controllers/list-answers-comments.controller'
+import { UploadAttachmentController } from './controllers/upload-attachment.controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -61,6 +62,7 @@ import { ListAnswerCommentsController } from './controllers/list-answers-comment
     DeleteAnswerCommentController,
     ListQuestionCommentsController,
     ListAnswerCommentsController,
+    UploadAttachmentController,
   ],
   providers: [
     CreateQuestionUseCase,
