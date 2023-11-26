@@ -22,6 +22,14 @@ export default class InMemoryQuestionsRepository
 
     this.items[questionIndex] = question
 
+    await this.questionAttachmentRepository.createMany(
+      question.attachments.getNewItems(),
+    )
+
+    await this.questionAttachmentRepository.deleteMany(
+      question.attachments.getRemovedItems(),
+    )
+
     DomainEvents.dispatchEventsForAggregate(question.id)
   }
 
@@ -41,6 +49,10 @@ export default class InMemoryQuestionsRepository
     await this.questionAttachmentRepository.deleteManyByQuestionId(
       question.id.toString(),
     )
+
+    await this.questionAttachmentRepository.deleteMany(
+      question.attachments.getItems(),
+    )
   }
 
   async findBySlug(slug: string) {
@@ -59,6 +71,10 @@ export default class InMemoryQuestionsRepository
 
   async create(question: Question) {
     this.items.push(question)
+
+    await this.questionAttachmentRepository.createMany(
+      question.attachments.getItems(),
+    )
 
     DomainEvents.dispatchEventsForAggregate(question.id)
   }
