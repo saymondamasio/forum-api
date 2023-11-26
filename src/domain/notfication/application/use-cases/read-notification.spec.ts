@@ -4,7 +4,7 @@ import { NotAllowedError } from '@/core/errors/erros/not-allowed-error'
 import { ReadNotificationUseCase } from './read-notification'
 
 import { InMemoryNotificationsRepository } from 'test/repositories/in-memory-notifications-repository'
-import { makeNotification } from 'test/factories/make-notificaiton'
+import { makeNotification } from 'test/factories/make-notification'
 
 let inMemoryNotificationsRepository: InMemoryNotificationsRepository
 let readNotification: ReadNotificationUseCase
