@@ -44,9 +44,9 @@ model Question {
   bestAnswer   Answer? @relation("bestAnswer", fields: [bestAnswerId], references: [id])
   bestAnswerId String? @unique @map("best_answer_id")
 
-  answers    Answer[]
-  comment    Comment[]
-  attachment Attachment[]
+  answers     Answer[]
+  comment     Comment[]
+  attachments Attachment[]
 
   @@map("questions")
 }
