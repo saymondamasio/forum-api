@@ -4,7 +4,6 @@ import {
   Attachment as PrismaAttachment,
 } from '@prisma/client'
 
-import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { QuestionDetails } from '@/domain/forum/enterprise/entities/value-objects/question-details'
 import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug'

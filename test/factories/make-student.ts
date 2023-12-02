@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { Inject, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import {

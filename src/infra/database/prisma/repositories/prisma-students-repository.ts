@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common'
 
-import { PaginationParams } from '@/core/repositories/pagination-params'
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
-import { Question } from '@/domain/forum/enterprise/entities/question'
 import { PrismaService } from '../prisma.service'
-import { PrismaQuestionMapper } from '../mappers/prisma-question-mapper'
 import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
 import { Student } from '@/domain/forum/enterprise/entities/student'
 import { PrismaStudentMapper } from '../mappers/prisma-student-mapper'
