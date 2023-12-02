@@ -7,7 +7,7 @@ export interface NotificationProps {
   title: string
   content: string
 
-  readAt?: Date
+  readAt?: Date | null
   createdAt: Date
 }
 

@@ -5,15 +5,28 @@ import { AnswersRepository } from '@/domain/forum/application/repositories/answe
 import { Answer } from '@/domain/forum/enterprise/entities/answer'
 import { PrismaService } from '../prisma.service'
 import { PrismaAnswerMapper } from '../mappers/prisma-answer-mapper'
+import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
+import { DomainEvents } from '@/core/events/domain-events'
 
 @Injectable()
 export class PrismaAnswersRepository implements AnswersRepository {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private answersAttachmentsRepository: AnswerAttachmentsRepository,
+  ) {}
 
   async create(answer: Answer): Promise<void> {
+    const data = PrismaAnswerMapper.toPrisma(answer)
+
     await this.prisma.answer.create({
-      data: PrismaAnswerMapper.toPrisma(answer),
+      data,
     })
+
+    await this.answersAttachmentsRepository.createMany(
+      answer.attachments.getItems(),
+    )
+
+    DomainEvents.dispatchEventsForAggregate(answer.id)
   }
 
   async delete(answer: Answer): Promise<void> {
@@ -29,12 +42,23 @@ export class PrismaAnswersRepository implements AnswersRepository {
   async save(answer: Answer): Promise<void> {
     const data = PrismaAnswerMapper.toPrisma(answer)
 
-    await this.prisma.answer.update({
-      data,
-      where: {
-        id: data.id,
-      },
-    })
+    Promise.all([
+      await this.prisma.answer.update({
+        data,
+        where: {
+          id: data.id,
+        },
+      }),
+      this.answersAttachmentsRepository.createMany(
+        answer.attachments.getNewItems(),
+      ),
+
+      this.answersAttachmentsRepository.deleteMany(
+        answer.attachments.getRemovedItems(),
+      ),
+    ])
+
+    DomainEvents.dispatchEventsForAggregate(answer.id)
   }
 
   async findById(id: string): Promise<Answer | null> {
