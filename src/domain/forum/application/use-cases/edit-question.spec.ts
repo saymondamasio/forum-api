@@ -7,17 +7,25 @@ import InMemoryQuestionsRepository from 'test/repositories/in-memory-questions-r
 import { makeQuestion } from 'test/factories/make-question'
 import InMemoryQuestionAttachmentRepository from 'test/repositories/in-memory-question-attachments-repository'
 import { makeQuestionAttachment } from 'test/factories/make-question-attachments'
+import InMemoryStudentsRepository from 'test/repositories/in-memory-students-repository'
+import InMemoryAttachmentsRepository from 'test/repositories/in-memory-attachments-repository'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryQuestionAttachmentRepository: InMemoryQuestionAttachmentRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let editQuestion: EditQuestionUseCase
 
 describe('Edit Question', () => {
   beforeEach(() => {
     inMemoryQuestionAttachmentRepository =
       new InMemoryQuestionAttachmentRepository()
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentsRepository,
     )
     editQuestion = new EditQuestionUseCase(
       inMemoryQuestionsRepository,

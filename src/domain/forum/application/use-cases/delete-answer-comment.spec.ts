@@ -5,13 +5,18 @@ import { DeleteAnswerCommentUseCase } from './delete-answer-comment'
 
 import InMemoryAnswerCommentsRepository from 'test/repositories/in-memory-answer-comments-repository'
 import { makeAnswerComment } from 'test/factories/make-answer-comment'
+import InMemoryStudentsRepository from 'test/repositories/in-memory-students-repository'
 
 let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let deleteAnswerComment: DeleteAnswerCommentUseCase
 
 describe('Delete Answer Comment', () => {
   beforeEach(() => {
-    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository()
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentsRepository,
+    )
     deleteAnswerComment = new DeleteAnswerCommentUseCase(
       inMemoryAnswerCommentsRepository,
     )

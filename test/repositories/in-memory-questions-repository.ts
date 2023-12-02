@@ -1,8 +1,12 @@
 import { DomainEvents } from '@/core/events/domain-events'
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { Question } from '@/domain/forum/enterprise/entities/question'
+import { QuestionDetails } from '@/domain/forum/enterprise/entities/value-objects/question-details'
+
+import InMemoryStudentsRepository from './in-memory-students-repository'
+import InMemoryQuestionAttachmentRepository from './in-memory-question-attachments-repository'
+import InMemoryAttachmentsRepository from './in-memory-attachments-repository'
 
 const PAGE_SIZE = 20
 
@@ -12,8 +16,54 @@ export default class InMemoryQuestionsRepository
   public items: Question[] = []
 
   constructor(
-    private questionAttachmentRepository: QuestionAttachmentsRepository,
+    private questionAttachmentRepository: InMemoryQuestionAttachmentRepository,
+    private attachmentRepository: InMemoryAttachmentsRepository,
+    private studentsRepository: InMemoryStudentsRepository,
   ) {}
+
+  async findDetailsBySlug(slug: string): Promise<QuestionDetails | null> {
+    const question = this.items.find((item) => item.slug.value === slug)
+
+    if (!question) return null
+
+    const author = this.studentsRepository.items.find((student) =>
+      student.id.equals(question.authorId),
+    )
+
+    if (!author)
+      throw new Error(
+        `Author with ID ${question.authorId.toString()} not exists`,
+      )
+
+    const questionAttachments = this.questionAttachmentRepository.items.filter(
+      (questionAttachment) => questionAttachment.questionId.equals(question.id),
+    )
+
+    const attachments = questionAttachments.map((questionAttachment) => {
+      const attachment = this.attachmentRepository.items.find((attachment) =>
+        attachment.id.equals(questionAttachment.attachmentId),
+      )
+
+      if (!attachment)
+        throw new Error(
+          `Attachment with ID ${questionAttachment.attachmentId.toString()} not exists`,
+        )
+
+      return attachment
+    })
+
+    return QuestionDetails.create({
+      questionId: question.id,
+      authorId: author.id,
+      author: author.name,
+      content: question.content,
+      slug: question.slug,
+      title: question.title,
+      attachments,
+      createdAt: question.createdAt,
+      updatedAt: question.updatedAt,
+    })
+  }
 
   async save(question: Question) {
     const questionIndex = this.items.findIndex(
