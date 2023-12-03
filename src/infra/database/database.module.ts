@@ -9,6 +9,7 @@ import { AnswerCommentsRepository } from '@/domain/forum/application/repositorie
 import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments-repository'
 import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository'
 import { NotificationsRepository } from '@/domain/notification/application/repositories/notifications-repository'
+import { CacheModule } from '../cache/cache.module'
 
 import { PrismaService } from './prisma/prisma.service'
 import { PrismaQuestionsRepository } from './prisma/repositories/prisma-questions-repository'
@@ -22,6 +23,7 @@ import { PrismaAttachmentsRepository } from './prisma/repositories/prisma-attach
 import { PrismaNotificationRepository } from './prisma/repositories/prisma-notification-repository'
 
 @Module({
+  imports: [CacheModule],
   providers: [
     PrismaService,
     {
