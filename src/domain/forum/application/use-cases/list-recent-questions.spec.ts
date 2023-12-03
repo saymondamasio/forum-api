@@ -1,18 +1,27 @@
+import { ListRecentQuestionsUseCase } from './list-recent-questions'
+
 import InMemoryQuestionsRepository from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
-import { ListRecentQuestionsUseCase } from './list-recent-questions'
 import InMemoryQuestionAttachmentRepository from 'test/repositories/in-memory-question-attachments-repository'
+import InMemoryStudentsRepository from 'test/repositories/in-memory-students-repository'
+import InMemoryAttachmentsRepository from 'test/repositories/in-memory-attachments-repository'
 
 let inMemoryQuestionAttachmentRepository: InMemoryQuestionAttachmentRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
 let listRecentQuestions: ListRecentQuestionsUseCase
 
 describe('List Recent Questions', () => {
   beforeEach(() => {
     inMemoryQuestionAttachmentRepository =
       new InMemoryQuestionAttachmentRepository()
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentsRepository,
     )
     listRecentQuestions = new ListRecentQuestionsUseCase(
       inMemoryQuestionsRepository,
